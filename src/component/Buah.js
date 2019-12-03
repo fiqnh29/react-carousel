@@ -75,6 +75,7 @@ const Example = (props) => {
         <CardBody style={{textAlign:'center'}}>
           <CardTitle><h3>{item.caption}</h3></CardTitle>
           <CardSubtitle><h5>Rp. {item.harga.toLocaleString()}</h5></CardSubtitle>
+          <Button color="success">Add to Cart</Button>
         </CardBody>
       </Card>
     )

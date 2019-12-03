@@ -8,11 +8,17 @@ const authReducer = (state = INITIAL_STATE, action) => {
         case 'LOGIN':
             return{
                 ...state,
-                username:action.payload,
-                role:action.payload
+                username:action.payload.username,
+                role:action.payload.role
             }
         case 'LOGOUT':
             return INITIAL_STATE
+        case 'CONTOH':
+            return{
+                ...state,
+                username:'halo',
+                role:'user'
+            }
         default:
             return state
     }

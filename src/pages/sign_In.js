@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {login} from '../redux/action';
-import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {
     Button, Input, Alert,
     Form, FormGroup, Label, Col
 } from 'reactstrap';
 import Axios from 'axios';
+import { stat } from 'fs';
 
 class sign_In extends Component{
     loginUser = () => {
@@ -36,26 +37,34 @@ class sign_In extends Component{
 
     render(){
         console.log(this.props.username)
+        if(this.props.username !==''){
+            return(
+                
+                <Redirect to='/Home'>
+                </Redirect>
+            )
+        }
         return(
             <div>
                 <div>
                     {/* <Col xs="6" sm="4"><Input type='text' innerRef={(text)=> this.text = text}/></Col>
                     <Col xs="6" sm="4"><Input type='password' innerRef={(pass)=> this.pass = pass}/></Col>
                     <Col xs="6" sm="4"><Button onClick={this.loginUser}>Login</Button></Col> */}
-                    <div></div>
-                    <Form inline>
-                        <FormGroup>
-                            <Label for="exampleEmail" hidden>Username</Label>
-                            <Input type="text" placeholder="Username" innerRef={(text)=> this.text = text} />
-                        </FormGroup>
-                        {' '}
-                        <FormGroup>
-                            <Label for="examplePassword" hidden>Password</Label>
-                            <Input type="password" placeholder="Password" innerRef={(pass)=> this.pass = pass} />
-                        </FormGroup>
-                        {' '}
-                        <Button color="primary" onClick={this.loginUser}>Login</Button>
-                    </Form>
+                    <div>
+                        <Form inline>
+                            <FormGroup>
+                                <Label for="exampleEmail" hidden>Username</Label>
+                                <Input type="text" placeholder="Username" innerRef={(text)=> this.text = text} />
+                            </FormGroup>
+                            {' '}
+                            <FormGroup>
+                                <Label for="examplePassword" hidden>Password</Label>
+                                <Input type="password" placeholder="Password" innerRef={(pass)=> this.pass = pass} />
+                            </FormGroup>
+                            {' '}
+                            <Button color="primary" onClick={this.loginUser}>Login</Button>
+                        </Form>
+                    </div>
                 </div>
             </div>
         )
@@ -64,7 +73,8 @@ class sign_In extends Component{
 
 const mapStatetoProps = (state) => {
     return {
-        username: state.user.username
+        username: state.user.username,
+        role: state.user.role
     }
 }
 
